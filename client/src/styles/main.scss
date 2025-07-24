@@ -1,0 +1,811 @@
+/* client/src/styles/main.scss */
+
+// -------------------------------------------------------------
+// 1. Variables - Define your design system
+// -------------------------------------------------------------
+$primary-color: #5B8FF9; // A vibrant, clear blue
+$secondary-color: #82E0AA; // A soft, engaging green
+$accent-color: #FFC300; // A warm, inviting amber for warnings/highlights
+$dark-text: #2D3748; // Dark grey for primary text
+$medium-text: #4A5568; // Medium grey for secondary text
+$light-text: #718096; // Light grey for subtle text
+
+$background-light: #F7FAFC; // Very light grey-blue background
+$background-card: #FFFFFF; // White for card backgrounds
+$border-light: #E2E8F0; // Light border color
+$error-color: #E53E3E; // Red for errors
+$success-color: #38A169; // Green for success
+
+$font-heading: 'Montserrat', sans-serif;
+$font-body: 'Open Sans', sans-serif;
+
+$shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+$shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+$shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+
+// -------------------------------------------------------------
+// 2. Base Styles - Reset and global typography/layout
+// -------------------------------------------------------------
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-body;
+    line-height: 1.6;
+    color: $dark-text;
+    background-color: $background-light;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex-grow: 1; // Allows the main content to grow and push footer down
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+    color: $dark-text;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+
+a {
+    color: $primary-color;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+        color: darken($primary-color, 15%);
+        text-decoration: underline;
+    }
+}
+
+p {
+    margin-bottom: 1em;
+    font-size: 1em;
+}
+
+// -------------------------------------------------------------
+// 3. Reusable UI Components
+// -------------------------------------------------------------
+
+// Buttons
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: $shadow-sm;
+    gap: 8px; // Space between text and icon
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+    }
+    &:active {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
+    }
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    &.btn-primary {
+        background-color: $primary-color;
+        color: white;
+        &:hover { background-color: darken($primary-color, 8%); }
+    }
+
+    &.btn-secondary {
+        background-color: $light-text;
+        color: white;
+        &:hover { background-color: darken($light-text, 8%); }
+    }
+
+    &.btn-danger {
+        background-color: $error-color;
+        color: white;
+        &:hover { background-color: darken($error-color, 8%); }
+    }
+
+    &.btn-sm {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    &.btn-lg {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+}
+
+// Forms & Inputs
+.form {
+    background-color: $background-card;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: $shadow-lg;
+    max-width: 600px;
+    margin: 40px auto;
+    border: 1px solid $border-light;
+
+    .form-group {
+        margin-bottom: 25px;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: $medium-text;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid $border-light;
+            border-radius: 8px;
+            font-size: 1em;
+            color: $dark-text;
+            background-color: $background-light;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input[type="file"] {
+            padding: 10px 0; // Adjust padding for file input
+        }
+
+        .date-picker-input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid $border-light;
+            border-radius: 8px;
+            font-size: 1em;
+            color: $dark-text;
+            background-color: $background-light;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+            }
+        }
+    }
+}
+
+.error-message {
+    background-color: lighten($error-color, 45%);
+    color: darken($error-color, 10%);
+    border: 1px solid $error-color;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+
+.loading-state, .error-state {
+    text-align: center;
+    padding: 60px;
+    font-size: 1.3em;
+    color: $light-text;
+    background-color: $background-card;
+    border-radius: 12px;
+    box-shadow: $shadow-md;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+// -------------------------------------------------------------
+// 4. Layout Specific Styles (Navbar, Footer, Pages)
+// -------------------------------------------------------------
+
+// Navbar
+.navbar {
+    background-color: $dark-text;
+    color: white;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: $shadow-md;
+
+    h1 {
+        font-family: $font-heading;
+        font-size: 1.8rem;
+        font-weight: 700;
+        .navbar-logo { // Targeting the Link inside h1 if needed
+            color: $primary-color;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+            &:hover {
+                color: lighten($primary-color, 10%);
+            }
+        }
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin-left: 30px;
+            a {
+                color: white;
+                font-weight: 600;
+                font-size: 1em;
+                position: relative;
+                padding-bottom: 5px; // For underline animation
+
+                &:hover {
+                    color: $primary-color;
+                    text-decoration: none; // Remove default underline
+                }
+
+                // Underline animation
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: $primary-color;
+                    transition: width 0.3s ease-in-out;
+                }
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+// Footer
+.footer {
+    background-color: $dark-text;
+    color: $light-text;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9em;
+    margin-top: 50px; // Add some space from content above
+}
+
+// Auth Pages (Login/Register)
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px); // Adjust based on navbar/footer height
+    padding: 20px;
+
+    .auth-form-container {
+        text-align: center;
+        width: 100%;
+
+        h2 {
+            font-size: 2.2em;
+            color: $primary-color;
+            margin-bottom: 30px;
+        }
+
+        .auth-link {
+            margin-top: 25px;
+            font-size: 0.95em;
+            color: $medium-text;
+            a {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+
+// Home Page
+.home-page {
+    text-align: center;
+    padding: 50px 20px;
+
+    .hero-section {
+        background: linear-gradient(135deg, $primary-color, darken($primary-color, 15%));
+        color: white;
+        padding: 80px 40px;
+        border-radius: 15px;
+        margin-bottom: 60px;
+        box-shadow: $shadow-lg;
+        animation: fadeIn 1s ease-out;
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white; // Ensure headings are white against the gradient
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+
+            .btn {
+                background-color: $accent-color;
+                color: $dark-text;
+                &:hover {
+                    background-color: darken($accent-color, 10%);
+                }
+            }
+            .btn-secondary {
+                background-color: white;
+                color: $primary-color;
+                &:hover {
+                    background-color: lighten($primary-color, 40%);
+                }
+            }
+        }
+    }
+
+    .features-section {
+        margin-bottom: 60px;
+
+        h2 {
+            font-size: 2.5em;
+            color: $primary-color;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -10px;
+                width: 100%;
+                height: 4px;
+                background-color: $secondary-color;
+                border-radius: 2px;
+            }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+
+            .feature-item {
+                background-color: $background-card;
+                border-radius: 12px;
+                box-shadow: $shadow-md;
+                padding: 30px;
+                text-align: left;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                &:hover {
+                    transform: translateY(-5px);
+                    box-shadow: $shadow-lg;
+                }
+
+                h3 {
+                    color: $secondary-color;
+                    font-size: 1.6em;
+                    margin-bottom: 15px;
+                }
+                p {
+                    color: $medium-text;
+                }
+            }
+        }
+    }
+
+    .cta-section {
+        h2 {
+            font-size: 2.5em;
+            color: $dark-text;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+
+// Dashboard Page
+.dashboard-page {
+    text-align: center;
+    padding: 20px 0;
+
+    h1 {
+        font-size: 3em;
+        color: $primary-color;
+        margin-bottom: 40px;
+        animation: slideInDown 0.8s ease-out;
+    }
+
+    .dashboard-actions {
+        margin-bottom: 50px;
+    }
+
+    section {
+        margin-bottom: 60px;
+        h2 {
+            font-size: 2.2em;
+            color: $dark-text;
+            margin-bottom: 35px;
+            position: relative;
+            display: inline-block;
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -8px;
+                width: 100%;
+                height: 3px;
+                background-color: $primary-color;
+                border-radius: 2px;
+            }
+        }
+    }
+
+    .capsule-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 35px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .capsule-card {
+        background-color: $background-card;
+        border-radius: 15px;
+        box-shadow: $shadow-md;
+        padding: 30px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 220px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+        border-left: 8px solid; // Dynamic border color
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: $shadow-lg;
+        }
+
+        .capsule-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            align-self: flex-start;
+            opacity: 0.7;
+        }
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 0.95em;
+            color: $medium-text;
+            margin-bottom: 8px;
+        }
+
+        .unlock-date {
+            font-size: 0.85em;
+            color: $light-text;
+            margin-top: 5px;
+        }
+
+        &.locked {
+            border-left-color: $accent-color;
+            .capsule-icon { color: $accent-color; }
+            h3 { color: darken($accent-color, 15%); }
+        }
+
+        &.unlocked {
+            border-left-color: $secondary-color;
+            .capsule-icon { color: $secondary-color; }
+            h3 { color: darken($secondary-color, 15%); }
+        }
+
+        .card-actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            .btn-sm {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+    }
+
+    .no-capsules {
+        padding: 30px;
+        background-color: lighten($background-light, 2%);
+        border-radius: 10px;
+        color: $light-text;
+        font-style: italic;
+        font-size: 1.1em;
+        box-shadow: $shadow-sm;
+    }
+}
+
+// View Capsule Page
+.view-capsule-page {
+    background-color: $background-card;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: $shadow-lg;
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+    border: 1px solid $border-light;
+
+    .btn-back {
+        align-self: flex-start;
+        margin-bottom: 30px;
+        background-color: $light-text;
+        color: white;
+        &:hover {
+            background-color: darken($light-text, 10%);
+        }
+    }
+
+    h2 {
+        color: $primary-color;
+        font-size: 2.8em;
+        margin-bottom: 25px;
+    }
+
+    .unlock-info {
+        font-size: 1.2em;
+        color: $medium-text;
+        margin-bottom: 35px;
+        strong {
+            color: $dark-text;
+            font-weight: 700;
+        }
+    }
+
+    .locked-content {
+        padding: 40px;
+        background-color: lighten($accent-color, 45%);
+        border: 2px dashed $accent-color;
+        border-radius: 10px;
+        margin-top: 40px;
+        animation: pulse 2s infinite ease-in-out;
+
+        p {
+            font-size: 1.3em;
+            color: darken($accent-color, 10%);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .countdown-display {
+            font-family: $font-heading;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: $accent-color;
+            h3 {
+                margin-top: 15px;
+                color: $accent-color;
+            }
+        }
+    }
+
+    .unlocked-content {
+        margin-top: 40px;
+        text-align: left;
+
+        .message-content {
+            background-color: lighten($secondary-color, 45%);
+            border-left: 6px solid $secondary-color;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            font-size: 1.15em;
+            color: $dark-text;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            box-shadow: $shadow-sm;
+        }
+
+        .capsule-files {
+            margin-top: 40px;
+
+            h3 {
+                color: $primary-color;
+                margin-bottom: 25px;
+                text-align: center;
+                font-size: 2em;
+            }
+
+            .file-gallery {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 25px;
+
+                .file-item {
+                    background-color: lighten($background-light, 3%);
+                    padding: 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                    box-shadow: $shadow-sm;
+                    border: 1px solid $border-light;
+                    transition: transform 0.2s ease-in-out;
+
+                    &:hover {
+                        transform: translateY(-3px);
+                        box-shadow: $shadow-md;
+                    }
+
+                    .capsule-image {
+                        max-width: 100%;
+                        height: 140px; // Fixed height for consistent gallery
+                        object-fit: contain; // Maintain aspect ratio
+                        border-radius: 8px;
+                        margin-bottom: 15px;
+                        border: 1px solid $border-light;
+                    }
+
+                    p {
+                        font-size: 0.9em;
+                        word-break: break-all;
+                        color: $medium-text;
+                        margin-bottom: 10px;
+                    }
+
+                    a {
+                        color: $primary-color;
+                        text-decoration: none;
+                        font-weight: 600;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// -------------------------------------------------------------
+// 5. Animations
+// -------------------------------------------------------------
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba($accent-color, 0.4); }
+    70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba($accent-color, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba($accent-color, 0); }
+}
+
+
+// -------------------------------------------------------------
+// 6. Responsive Adjustments
+// -------------------------------------------------------------
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        h1 { font-size: 1.5rem; }
+        ul {
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            li { margin: 5px 10px; }
+        }
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.4em; }
+
+    .form {
+        padding: 30px;
+        margin: 20px auto;
+    }
+
+    .home-page {
+        .hero-section {
+            padding: 60px 20px;
+            h1 { font-size: 2.5em; }
+            p { font-size: 1em; }
+            .hero-actions {
+                flex-direction: column;
+                .btn { width: 80%; }
+            }
+        }
+        .features-section h2 { font-size: 2em; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .cta-section h2 { font-size: 2em; }
+    }
+
+    .dashboard-page {
+        h1 { font-size: 2.5em; }
+        section h2 { font-size: 1.8em; }
+        .capsule-grid { grid-template-columns: 1fr; }
+    }
+
+    .view-capsule-page {
+        padding: 30px;
+        h2 { font-size: 2em; }
+        .unlock-info { font-size: 1em; }
+        .locked-content p { font-size: 1.1em; }
+        .countdown-display { font-size: 1.5em; }
+        .unlocked-content {
+            .message-content { font-size: 1em; }
+            .capsule-files {
+                h3 { font-size: 1.8em; }
+                .file-gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+                .file-item .capsule-image { height: 100px; }
+            }
+        }
+    }
+}
