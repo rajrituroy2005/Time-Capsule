@@ -1,8 +1,3 @@
-/* client/src/styles/main.scss */
-
-// -------------------------------------------------------------
-// 1. Variables - Define your design system
-// -------------------------------------------------------------
 $primary-color: #5B8FF9; // A vibrant, clear blue
 $secondary-color: #82E0AA; // A soft, engaging green
 $accent-color: #FFC300; // A warm, inviting amber for warnings/highlights
@@ -22,10 +17,6 @@ $font-body: 'Open Sans', sans-serif;
 $shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
 $shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
 $shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
-
-// -------------------------------------------------------------
-// 2. Base Styles - Reset and global typography/layout
-// -------------------------------------------------------------
 *,
 *::before,
 *::after {
@@ -48,7 +39,7 @@ body {
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
-    flex-grow: 1; // Allows the main content to grow and push footer down
+    flex-grow: 1; 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -77,11 +68,7 @@ p {
     font-size: 1em;
 }
 
-// -------------------------------------------------------------
-// 3. Reusable UI Components
-// -------------------------------------------------------------
 
-// Buttons
 .btn {
     display: inline-flex;
     align-items: center;
@@ -96,7 +83,7 @@ p {
     text-decoration: none;
     transition: all 0.2s ease-in-out;
     box-shadow: $shadow-sm;
-    gap: 8px; // Space between text and icon
+    gap: 8px;
 
     &:hover {
         transform: translateY(-2px);
@@ -142,7 +129,7 @@ p {
     }
 }
 
-// Forms & Inputs
+
 .form {
     background-color: $background-card;
     padding: 40px;
