@@ -1,7 +1,7 @@
 // client/src/services/timeCapsuleService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/timecapsules'; // <--- Explicitly add the backend host and port // Adjust port
+const API_URL = 'https://time-capsule-9mfd.onrender.com/api/timecapsules'; // <--- Explicitly add the backend host and port // Adjust port
 
 const getToken = () => localStorage.getItem('token');
 
