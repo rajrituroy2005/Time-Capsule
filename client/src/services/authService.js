@@ -1,7 +1,7 @@
 // client/src/services/authService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/auth'; // <-- THIS MUST BE 'http://localhost:5000/api/auth'
+const API_URL = 'https://time-capsule-9mfd.onrender.com/api/auth'; // <-- THIS MUST BE 'http://localhost:5000/api/auth'
 
 export const registerUser = async (userData) => {
     const res = await axios.post(`${API_URL}/register`, userData);
