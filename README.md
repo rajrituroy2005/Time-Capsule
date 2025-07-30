@@ -56,8 +56,8 @@ DIGITAL TIME CAPSULE
 Create a `.env` file in the `/server` folder and add:
 
 ```env
-MONGO_URI=your-mongodb-uri
-JWT_SECRET=your-secret
+MONGO_URI=****
+JWT_SECRET=****
 PORT=5000
 
 
